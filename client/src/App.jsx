@@ -6,8 +6,10 @@ function App() {
   const [title, setTitle] = useState("");
   const [description, setdescription] = useState("");
 
+  const API_LINK = import.meta.env.VITE_API_LINK;
+
   async function fetchUsers() {
-    const response = await fetch("http://localhost:3000/users");
+    const response = await fetch(`${API_LINK}/users`);
     if (!response.ok) {
       console.warn("Response is not OK!");
     }
@@ -25,7 +27,7 @@ function App() {
       alert("Title AND Description are required!");
       return;
     }
-    const response = await fetch("http://localhost:3000/users", {
+    const response = await fetch(`${API_LINK}/users`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -45,7 +47,7 @@ function App() {
   // delete the user
 
   async function handleDeleteUser(userId) {
-    const response = await fetch(`http://localhost:3000/users/${userId}`, {
+    const response = await fetch(`${API_LINK}/users/${userId}`, {
       method: "DELETE",
     });
     if (!response.ok) {
